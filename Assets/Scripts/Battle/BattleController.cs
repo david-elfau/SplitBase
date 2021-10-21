@@ -8,11 +8,11 @@ public class BattleController : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject PlayerAIPrefab;
 
-    private List<Node> nodeList;
+    public List<Node> nodeList;
     private List<Unit> unitList;
-    private List<PlayerAI> enemyList = new List<PlayerAI>();
-    private Player player;
-    private ObjectLifeCycle lifeCycle = new ObjectLifeCycle();
+    public List<PlayerAI> enemyList = new List<PlayerAI>();
+    public Player player;
+    public ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
     public void Initialize(BattleScriptableObject battleInfo)
     {
@@ -33,10 +33,20 @@ public class BattleController : MonoBehaviour
 
 
         this.unitList = new List<Unit>(); //TODO CREATE BUNCH OF UNITS
-
-        lifeCycle.Initializated();
-
+        RegisterEvents();
+        LifeCycle.Initializated();
         Debug.Log("Nivel cargado");
+    }
+
+    private void RegisterEvents()
+    {
+        EventBus.Instance.StartListening(EventName.BattleStarts, InitBattle);
+        EventBus.Instance.StartListening(EventName.BattleEnds, EndBattle);
+    }
+
+    private void UnRegisterEvents()
+    {
+        //TODO 
     }
 
 
@@ -78,13 +88,23 @@ public class BattleController : MonoBehaviour
     public void InitBattle()
     {
         //TODO
-        lifeCycle.Play();
+        foreach (Node node in nodeList)
+        {
+            node.LifeCycle.Play();
+        }
+        foreach (Unit unit in unitList)
+        {
+            unit.LifeCycle.Play();
+        }
+
+        LifeCycle.Play();
+
     }
 
     public void EndBattle()
     {
         //TODO
-        lifeCycle.End();
+        LifeCycle.End();
     }
 
     public void NodeConquered()
@@ -133,7 +153,7 @@ public class BattleController : MonoBehaviour
 
     void Update()
     {
-        if(lifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.running)
+        if(LifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.running)
         {
             foreach(Node node in nodeList)
             {

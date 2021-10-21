@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    private Player PlayerOwner;
-    private float Power;
+    public Player PlayerOwner;
+    public float Power;
 
 
-    private ObjectLifeCycle lifeCycle = new ObjectLifeCycle();
+    public  ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
     public void Initialize(Player owner, float initialPower, Vector3 position)
     {
@@ -21,9 +21,7 @@ public class Node : MonoBehaviour
             this.GetComponent<Renderer>().material.SetColor("_Color", owner.EnemyColor);
         }
 
-
-
-        lifeCycle.Initializated();
+        LifeCycle.Initializated();
     }
 
     public Player GetPlayer()
@@ -38,7 +36,10 @@ public class Node : MonoBehaviour
 
     public void IncreaseValue()
     {
-        Power += PlayerOwner.GetUnitGrowPerSecond() * Time.deltaTime;
+        if (PlayerOwner)
+        {
+            Power += PlayerOwner.GetUnitGrowPerSecond() * Time.deltaTime;
+        }
     }
 
 

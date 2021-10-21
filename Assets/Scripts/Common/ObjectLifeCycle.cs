@@ -42,4 +42,9 @@ public class ObjectLifeCycle
     {
         state = Status.ended;
     }
+
+    public bool IsRunning()
+    {
+        return state == Status.running;
+    }
 }

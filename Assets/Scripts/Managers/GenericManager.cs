@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericManager : MonoBehaviour
+public abstract class GenericManager : MonoBehaviour
 {
 
     public bool initializated = false;
@@ -10,5 +10,9 @@ public class GenericManager : MonoBehaviour
     public virtual void Initialize()
     {
         initializated = true;
+    }
+
+    public virtual void RegisterEvents()
+    {
     }
 }

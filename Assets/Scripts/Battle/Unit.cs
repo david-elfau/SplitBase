@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
     private int power;
     private Node nodeSource;
     private Node nodeDestiny;
-    private ObjectLifeCycle status;
+    public ObjectLifeCycle LifeCycle;
 
     private Vector3 position;
     private Vector3 direction;
@@ -25,7 +25,7 @@ public class Unit : MonoBehaviour
         this.nodeDestiny = nodeDestiny;
         direction = nodeDestiny.transform.position - nodeSource.transform.position;
         direction.Normalize();
-        status.Initializated();
+        LifeCycle.Initializated();
     }
 
     internal void Move()
