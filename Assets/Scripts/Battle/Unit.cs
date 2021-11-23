@@ -9,27 +9,80 @@ public class Unit : MonoBehaviour
     private int power;
     private Node nodeSource;
     private Node nodeDestiny;
-    public ObjectLifeCycle LifeCycle;
+    public ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
-    private Vector3 position;
     private Vector3 direction;
 
     //TODO REMOVE CONSTANT
     private const float movementSpeed = 1f; //m/s 
+    private const float distanceThreadshold = 0.001f; //m 
 
-    public void Initialize(Node nodeSource, int power, Node nodeDestiny)
+
+    public int GetPower()
+    {
+        return power;
+    }
+    public Player GetPlayerOwner()
+    {
+        return playerOwner;
+    }
+
+    public void Initialize()
+    {
+        playerOwner = null;
+        this.power = 1;
+        this.nodeSource = null;
+        this.nodeDestiny = null;
+        direction = Vector3.zero;
+        transform.position = Vector3.zero;
+        LifeCycle.Initializated();
+    }
+
+    public void StartMoving(Node nodeSource, int power, Node nodeDestiny)
     {
         playerOwner = nodeSource.GetPlayer();
         this.power = power;
         this.nodeSource = nodeSource;
         this.nodeDestiny = nodeDestiny;
+
+        transform.position = this.nodeSource.transform.position;
+
         direction = nodeDestiny.transform.position - nodeSource.transform.position;
         direction.Normalize();
-        LifeCycle.Initializated();
+
+        if (playerOwner)
+        {
+            this.GetComponent<Renderer>().material.SetColor("_Color", playerOwner.EnemyColor);
+        }
+
+        LifeCycle.Play();
     }
 
-    internal void Move()
+    public void Move()
     {
-        position = direction * Time.deltaTime * movementSpeed;
+        if (LifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.running)
+        {
+
+            Vector3 path = nodeDestiny.transform.position - transform.position;
+
+            transform.position += path.normalized * Time.deltaTime * movementSpeed;
+
+
+            if (path.sqrMagnitude <= distanceThreadshold)
+            {
+                NodeReached();
+            }
+        }
+    }
+
+    public void NodeReached()
+    {
+        nodeDestiny.ReceiveHit(this);
+        DisableUnit();
+    }
+
+    public void DisableUnit()
+    {
+        LifeCycle.Pause();
     }
 }

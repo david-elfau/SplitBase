@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    private BattleController battleController;
+
     public Player PlayerOwner;
     public float Power;
 
-
     public  ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
-    public void Initialize(Player owner, float initialPower, Vector3 position)
+    public void Initialize(Player owner, float initialPower, Vector3 position, BattleController battleController)
     {
+        this.battleController = battleController;
         PlayerOwner = owner;
         Power = initialPower;
         this.transform.position = position;
 
-        if (owner)
-        {
-            this.GetComponent<Renderer>().material.SetColor("_Color", owner.EnemyColor);
-        }
+        ChangeColor();
 
         LifeCycle.Initializated();
+    }
+
+    private void ChangeColor()
+    {
+        if (PlayerOwner)
+        {
+            this.GetComponent<Renderer>().material.SetColor("_Color", PlayerOwner.EnemyColor);
+        }
+
     }
 
     public Player GetPlayer()
@@ -32,6 +40,12 @@ public class Node : MonoBehaviour
     public void GetConquered(Player newOwner)
     {
         PlayerOwner = newOwner;
+        if(Power < 0)
+        {
+            Power *= -1;
+        }
+        ChangeColor();
+
     }
 
     public void IncreaseValue()
@@ -42,5 +56,30 @@ public class Node : MonoBehaviour
         }
     }
 
+    public void ReceiveHit(Unit unit)
+    {
+        if(PlayerOwner == unit.GetPlayerOwner())
+        {
+            Power += unit.GetPower();
+        }
+        else
+        {
+            Power -= unit.GetPower();
+            if (Power < 0)
+            {
+                GetConquered(unit.GetPlayerOwner());
+            }
+        }
+    }
 
+    public void Attack(Node enemyNode)
+    {
+        int unitsToAttack = (int) (Power * 0.5f);
+        Power -= unitsToAttack;
+        for (int i = 0; i < unitsToAttack; i++)
+        {
+            Unit unit = battleController.GetFreeUnit();
+            unit.StartMoving(this, 1, enemyNode);
+        }
+    }
 }

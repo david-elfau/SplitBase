@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerAI : Player
 {
-    private float secondsBetweenDecision = 3;
+    private float secondsBetweenDecision = 6;
     private float timeLeftToDecision = 0;
 
 
-    public override void Initialize(PlayerScriptableObject so)
+    public override void Initialize(PlayerScriptableObject so, BattleController battleController)
     {
+        this.battleController = battleController;
         Name = so.Name;
         EnemyColor = so.EnemyColor;
         unitGrowPerSecond = so.UnitIncreasePerSecond;
@@ -24,6 +25,11 @@ public class PlayerAI : Player
             //TODO
             Debug.Log("Player " + Name + " is making his move");
             timeLeftToDecision = secondsBetweenDecision;
+            Node node = battleController.GetWeakestRivalNode(this);
+            if(node != null)
+            {
+                battleController.Attack(node, this);
+            }
         }
     }
 

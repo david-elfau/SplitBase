@@ -24,10 +24,7 @@ public class ObjectLifeCycle
 
     public void Play()
     {
-        if (state == Status.paused)
-        {
-            state = Status.running;
-        }
+        state = Status.running;
     }
 
     public void Initializated()

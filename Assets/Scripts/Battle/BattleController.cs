@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class BattleController : MonoBehaviour
     public GameObject NodePrefab;
     public GameObject PlayerPrefab;
     public GameObject PlayerAIPrefab;
+    public GameObject UnitPrefab;
 
     public List<Node> nodeList;
     private List<Unit> unitList;
@@ -26,16 +28,62 @@ public class BattleController : MonoBehaviour
 
             Player playerNode = AddOrGetPlayer(node.Player);
 
-            gameObject.GetComponent<Node>().Initialize(playerNode, node.InitialPower, nodePosition);
+            gameObject.GetComponent<Node>().Initialize(playerNode, node.InitialPower, nodePosition,this);
 
             nodeList.Add(gameObject);
         }
 
+        InitUnits();
+        
 
-        this.unitList = new List<Unit>(); //TODO CREATE BUNCH OF UNITS
         RegisterEvents();
         LifeCycle.Initializated();
         Debug.Log("Nivel cargado");
+    }
+
+    public Node GetWeakestRivalNode(PlayerAI playerAI)
+    {
+        Node nodePropossed = null;
+        foreach(Node node in nodeList)
+        {
+            if(node.PlayerOwner != playerAI)
+            {
+                if(nodePropossed == null)
+                {
+                    nodePropossed = node;
+                }
+                
+                if (nodePropossed.Power > node.Power)
+                {
+                    nodePropossed = node;
+                }
+            }
+        }
+        return nodePropossed;
+    }
+
+    private void InitUnits()
+    {
+        this.unitList = new List<Unit>();
+        for (int i = 0;i<100;i++)
+        {
+            Unit gameObject = Instantiate(UnitPrefab, this.transform).GetComponent<Unit>();
+            gameObject.Initialize();
+            //TODO CREATE BUNCH OF UNITS
+            unitList.Add(gameObject);
+        }
+    }
+
+    public Unit GetFreeUnit()
+    {
+        foreach(Unit u in unitList)
+        {
+            if(u.LifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.paused)
+            {
+                return u;
+            }
+        }
+        return null;
     }
 
     private void RegisterEvents()
@@ -46,7 +94,8 @@ public class BattleController : MonoBehaviour
 
     private void UnRegisterEvents()
     {
-        //TODO 
+        EventBus.Instance.StopListening(EventName.BattleStarts, InitBattle);
+        EventBus.Instance.StopListening(EventName.BattleEnds, EndBattle);
     }
 
 
@@ -71,12 +120,12 @@ public class BattleController : MonoBehaviour
                 {
                     playerOut = Instantiate(PlayerPrefab, this.transform).GetComponent<Player>();
                     player = playerOut;
-                    player.Initialize(playerSO);
+                    player.Initialize(playerSO, this);
                 }
                 else
                 {
                     PlayerAI ai = Instantiate(PlayerAIPrefab, this.transform).GetComponent<PlayerAI>();
-                    ai.Initialize(playerSO);
+                    ai.Initialize(playerSO, this);
                     playerOut = ai;
                     enemyList.Add(ai);
                 }
@@ -94,7 +143,7 @@ public class BattleController : MonoBehaviour
         }
         foreach (Unit unit in unitList)
         {
-            unit.LifeCycle.Play();
+            //unit.LifeCycle.Play();
         }
 
         LifeCycle.Play();
@@ -170,5 +219,16 @@ public class BattleController : MonoBehaviour
             }
         }
         
+    }
+
+    public void Attack(Node nodeDestiny, Player player)
+    {
+        foreach(Node node in nodeList)
+        {
+            if(node.PlayerOwner == player)
+            {
+                node.Attack(nodeDestiny);
+            }
+        }
     }
 }
