@@ -8,10 +8,10 @@ public class BattleController : MonoBehaviour
     public GameObject NodePrefab;
     public GameObject PlayerPrefab;
     public GameObject PlayerAIPrefab;
-    public GameObject UnitPrefab;
+    public PoolObject UnitPrefab;
 
     public List<Node> nodeList;
-    private List<Unit> unitList;
+    public ObjectPool unitPool;
     public List<PlayerAI> enemyList = new List<PlayerAI>();
     public Player player;
     public ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
@@ -64,26 +64,10 @@ public class BattleController : MonoBehaviour
 
     private void InitUnits()
     {
-        this.unitList = new List<Unit>();
-        for (int i = 0;i<100;i++)
-        {
-            Unit gameObject = Instantiate(UnitPrefab, this.transform).GetComponent<Unit>();
-            gameObject.Initialize();
-            //TODO CREATE BUNCH OF UNITS
-            unitList.Add(gameObject);
-        }
-    }
+        unitPool = gameObject.AddComponent(typeof(ObjectPool)) as ObjectPool;
 
-    public Unit GetFreeUnit()
-    {
-        foreach(Unit u in unitList)
-        {
-            if(u.LifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.paused)
-            {
-                return u;
-            }
-        }
-        return null;
+        unitPool.Initialize(UnitPrefab, 100);
+
     }
 
     private void RegisterEvents()
@@ -140,10 +124,6 @@ public class BattleController : MonoBehaviour
         foreach (Node node in nodeList)
         {
             node.LifeCycle.Play();
-        }
-        foreach (Unit unit in unitList)
-        {
-            //unit.LifeCycle.Play();
         }
 
         LifeCycle.Play();
@@ -208,10 +188,8 @@ public class BattleController : MonoBehaviour
             {
                 node.IncreaseValue();
             }
-            foreach (Unit unit in unitList)
-            {
-                unit.Move();
-            }
+
+            unitPool.UpdatePool();
 
             foreach(PlayerAI ai in enemyList)
             {

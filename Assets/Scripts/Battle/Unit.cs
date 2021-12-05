@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : PoolObject
 {
     private Player playerOwner;
     private int power;
     private Node nodeSource;
     private Node nodeDestiny;
-    public ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
     private Vector3 direction;
 
@@ -27,15 +26,15 @@ public class Unit : MonoBehaviour
         return playerOwner;
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
+        LifeCycle.Initializated();
         playerOwner = null;
         this.power = 1;
         this.nodeSource = null;
         this.nodeDestiny = null;
         direction = Vector3.zero;
         transform.position = Vector3.zero;
-        LifeCycle.Initializated();
     }
 
     public void StartMoving(Node nodeSource, int power, Node nodeDestiny)
@@ -55,10 +54,10 @@ public class Unit : MonoBehaviour
             this.GetComponent<Renderer>().material.SetColor("_Color", playerOwner.EnemyColor);
         }
 
-        LifeCycle.Play();
+        EnablePoolObject();
     }
 
-    public void Move()
+    public override void UpdatePoolObject()
     {
         if (LifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.running)
         {
@@ -78,11 +77,6 @@ public class Unit : MonoBehaviour
     public void NodeReached()
     {
         nodeDestiny.ReceiveHit(this);
-        DisableUnit();
-    }
-
-    public void DisableUnit()
-    {
-        LifeCycle.Pause();
+        DisablePoolObject();
     }
 }

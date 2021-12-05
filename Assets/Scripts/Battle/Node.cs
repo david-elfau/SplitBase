@@ -78,7 +78,7 @@ public class Node : MonoBehaviour
         Power -= unitsToAttack;
         for (int i = 0; i < unitsToAttack; i++)
         {
-            Unit unit = battleController.GetFreeUnit();
+            Unit unit =(Unit) battleController.unitPool.GetFreeObject();
             unit.StartMoving(this, 1, enemyNode);
         }
     }

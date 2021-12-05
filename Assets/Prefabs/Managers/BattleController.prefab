@@ -46,7 +46,8 @@ MonoBehaviour:
   NodePrefab: {fileID: 6191418243231721927, guid: 47121edb03d6f814fbfaca432aa9f239, type: 3}
   PlayerPrefab: {fileID: 5375309313119816384, guid: 19bc24307829d474ebb1ff4ed03bf402, type: 3}
   PlayerAIPrefab: {fileID: 5375309313119816384, guid: a455b4b67a60ef64880fa4f451f44366, type: 3}
-  UnitPrefab: {fileID: 4214876350106185137, guid: 905d83d88a05d6a40a2468295463bfeb, type: 3}
+  UnitPrefab: {fileID: 8814763485986651914, guid: 905d83d88a05d6a40a2468295463bfeb, type: 3}
   nodeList: []
+  unitPool: {fileID: 0}
   enemyList: []
   player: {fileID: 0}
