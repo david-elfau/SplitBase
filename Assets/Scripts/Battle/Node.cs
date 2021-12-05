@@ -11,6 +11,9 @@ public class Node : MonoBehaviour
 
     public  ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
+    //TODO remove hardcode value
+    float timeBetweenNodes = 0.2f;
+
     public void Initialize(Player owner, float initialPower, Vector3 position, BattleController battleController)
     {
         this.battleController = battleController;
@@ -79,7 +82,7 @@ public class Node : MonoBehaviour
         for (int i = 0; i < unitsToAttack; i++)
         {
             Unit unit =(Unit) battleController.unitPool.GetFreeObject();
-            unit.StartMoving(this, 1, enemyNode);
+            unit.StartMoving(this, 1, enemyNode, timeBetweenNodes*i);
         }
     }
 }

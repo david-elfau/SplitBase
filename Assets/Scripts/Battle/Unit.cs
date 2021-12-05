@@ -12,6 +12,8 @@ public class Unit : PoolObject
 
     private Vector3 direction;
 
+    private float TimeToMove = 0f;
+
     //TODO REMOVE CONSTANT
     private const float movementSpeed = 1f; //m/s 
     private const float distanceThreadshold = 0.001f; //m 
@@ -37,8 +39,9 @@ public class Unit : PoolObject
         transform.position = Vector3.zero;
     }
 
-    public void StartMoving(Node nodeSource, int power, Node nodeDestiny)
+    public void StartMoving(Node nodeSource, int power, Node nodeDestiny, float delay)
     {
+        TimeToMove = delay;
         playerOwner = nodeSource.GetPlayer();
         this.power = power;
         this.nodeSource = nodeSource;
@@ -61,15 +64,18 @@ public class Unit : PoolObject
     {
         if (LifeCycle.GetCurrentStatus() == ObjectLifeCycle.Status.running)
         {
-
-            Vector3 path = nodeDestiny.transform.position - transform.position;
-
-            transform.position += path.normalized * Time.deltaTime * movementSpeed;
-
-
-            if (path.sqrMagnitude <= distanceThreadshold)
+            TimeToMove -= Time.deltaTime;
+            if(TimeToMove <0)
             {
-                NodeReached();
+                Vector3 path = nodeDestiny.transform.position - transform.position;
+
+                transform.position += path.normalized * Time.deltaTime * movementSpeed;
+
+                if (path.sqrMagnitude <= distanceThreadshold)
+                {
+                    NodeReached();
+                }
+
             }
         }
     }
