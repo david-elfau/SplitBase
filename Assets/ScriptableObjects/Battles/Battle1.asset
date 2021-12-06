@@ -18,19 +18,19 @@ MonoBehaviour:
     GrowSpeed: 1
     Player: {fileID: 11400000, guid: edcac6f0894fab3409f2777a83d8e190, type: 2}
   - Position: {x: 0, y: 5}
-    InitialPower: 11
+    InitialPower: 10
     GrowSpeed: 1
     Player: {fileID: 11400000, guid: d62e5d90f7291714c8413a929740e73b, type: 2}
   - Position: {x: 0, y: 0}
-    InitialPower: 12
-    GrowSpeed: 1
-    Player: {fileID: 11400000, guid: d62e5d90f7291714c8413a929740e73b, type: 2}
+    InitialPower: 10
+    GrowSpeed: 0
+    Player: {fileID: 0}
   - Position: {x: 5, y: 0}
-    InitialPower: 13
+    InitialPower: 10
     GrowSpeed: 0
     Player: {fileID: 0}
-  - Position: {x: 2.5, y: 2.5}
-    InitialPower: 14
-    GrowSpeed: 0
-    Player: {fileID: 0}
+  - Position: {x: 2.5, y: 1.5}
+    InitialPower: 10
+    GrowSpeed: 1
+    Player: {fileID: 11400000, guid: 3bb3c5bfa386d5c439c10733c431e69e, type: 2}
   GoldReward: 100
