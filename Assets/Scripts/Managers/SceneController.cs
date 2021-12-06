@@ -20,6 +20,13 @@ public class SceneController : GenericManager
         EventBus.Instance.StartListening(EventName.BattleUnload, ChangeToMainScene);
     }
 
+
+    public override void UnregisterEvents()
+    {
+        EventBus.Instance.StopListening(EventName.BattleLoad, ChangeToGameScene);
+        EventBus.Instance.StopListening(EventName.BattleUnload, ChangeToMainScene);
+    }
+
     void ChangeToGameScene(object objectParameter)
     {
         Debug.Log("Load game scene");

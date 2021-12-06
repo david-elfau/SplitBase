@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Easy
   EnemyColor: {r: 0.32399282, g: 0.9245283, b: 0.11774653, a: 1}
+  UnitIncreasePerSecond: 1
+  TimeToTakeDecision: 3
+  RandomFactorDecision: 0.5

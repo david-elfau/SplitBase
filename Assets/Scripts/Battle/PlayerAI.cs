@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerAI : Player
 {
-    private float secondsBetweenDecision = 6;
+    private float secondsBetweenDecision = float.MaxValue;
     private float timeLeftToDecision = 0;
+    private float randomFactorOnDecision = 1f;
 
 
     public override void Initialize(PlayerScriptableObject so, BattleController battleController)
@@ -14,7 +15,10 @@ public class PlayerAI : Player
         Name = so.Name;
         EnemyColor = so.EnemyColor;
         unitGrowPerSecond = so.UnitIncreasePerSecond;
-        timeLeftToDecision = secondsBetweenDecision;
+        randomFactorOnDecision = so.RandomFactorDecision;
+        secondsBetweenDecision = so.TimeToTakeDecision;
+
+        timeLeftToDecision = secondsBetweenDecision * Random.Range(randomFactorOnDecision,1+ randomFactorOnDecision);
             
     }
     public void TakeDecision()
@@ -22,9 +26,9 @@ public class PlayerAI : Player
         timeLeftToDecision -= Time.deltaTime;
         if (timeLeftToDecision < 0)
         {
-            //TODO
             Debug.Log("Player " + Name + " is making his move");
-            timeLeftToDecision = secondsBetweenDecision;
+            timeLeftToDecision = secondsBetweenDecision * Random.Range(randomFactorOnDecision, 1 + randomFactorOnDecision);
+
             Node node = battleController.GetWeakestRivalNode(this);
             if(node != null)
             {

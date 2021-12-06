@@ -7,12 +7,8 @@ public abstract class GenericManager : MonoBehaviour
 
     public bool initializated = false;
 
-    public virtual void Initialize()
-    {
-        initializated = true;
-    }
+    public abstract void Initialize();
 
-    public virtual void RegisterEvents()
-    {
-    }
+    public abstract void RegisterEvents();
+    public abstract void UnregisterEvents();
 }

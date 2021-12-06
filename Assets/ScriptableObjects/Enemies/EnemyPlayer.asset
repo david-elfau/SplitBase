@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Player
   EnemyColor: {r: 0.15666918, g: 0.11764706, b: 0.9254902, a: 1}
+  UnitIncreasePerSecond: 1
+  TimeToTakeDecision: 6
+  RandomFactorDecision: 1

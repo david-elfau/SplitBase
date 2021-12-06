@@ -56,4 +56,14 @@ public class DataManager : GenericManager
         }
         return 0;
     }
+
+    public override void RegisterEvents()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void UnregisterEvents()
+    {
+        throw new System.NotImplementedException();
+    }
 }

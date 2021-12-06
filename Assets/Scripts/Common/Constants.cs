@@ -8,7 +8,8 @@ public class Constants : MonoBehaviour
 public enum EventName { 
     BattleLoad,
     BattleStarts,
-    BattleEnds,
+    BattleWin,
+    BattleLost,
     BattleUnload,
     BattlePauses,
     BattleResumes,

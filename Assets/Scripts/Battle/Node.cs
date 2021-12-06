@@ -49,6 +49,9 @@ public class Node : MonoBehaviour
         }
         ChangeColor();
 
+        EventBus.Instance.TriggerEvent(EventName.NodeConquered, new ParameterBusObject(this));
+
+
     }
 
     public void IncreaseValue()
@@ -88,7 +91,6 @@ public class Node : MonoBehaviour
 
     public void OnMouseDown()
     {
-        Debug.Log("Node:Touched. Power = "+Power);
         EventBus.Instance.TriggerEvent(EventName.NodeTapped,new ParameterBusObject(this));
     }
 }

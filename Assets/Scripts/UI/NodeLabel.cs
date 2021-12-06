@@ -12,6 +12,9 @@ public class NodeLabel : MonoBehaviour
     public void Initialize(Node objectAttached)
     {
         NodeAttached = objectAttached;
+
+        SetLabelText();
+        SetLabelPosition();
     }
 
     // Update is called once per frame
@@ -19,9 +22,20 @@ public class NodeLabel : MonoBehaviour
     {
         if(NodeAttached.LifeCycle.IsRunning())
         {
-            Vector3 textPos = Camera.main.WorldToScreenPoint(NodeAttached.transform.position);
-            TextLabel.text = ((int) NodeAttached.Power).ToString();
-            TextLabel.transform.position = textPos;
+            SetLabelText();
+            SetLabelPosition();
         }        
     }
+
+    void SetLabelPosition()
+    {
+        Vector3 textPos = Camera.main.WorldToScreenPoint(NodeAttached.transform.position);
+        TextLabel.transform.position = textPos;
+    }
+
+    void SetLabelText()
+    {
+        TextLabel.text = ((int)NodeAttached.Power).ToString();
+    }
+
 }

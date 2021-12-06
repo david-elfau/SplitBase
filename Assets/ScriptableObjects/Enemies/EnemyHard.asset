@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Hard
   EnemyColor: {r: 0.8490566, g: 0.15582792, b: 0, a: 1}
+  UnitIncreasePerSecond: 1
+  TimeToTakeDecision: 12
+  RandomFactorDecision: 0.5

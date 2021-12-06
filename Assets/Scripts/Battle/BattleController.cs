@@ -16,6 +16,21 @@ public class BattleController : MonoBehaviour
     public Player player;
     public ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
+
+
+    private void RegisterEvents()
+    {
+        EventBus.Instance.StartListening(EventName.BattleStarts, InitBattle);
+        EventBus.Instance.StartListening(EventName.NodeTapped, NodeTapped);
+        EventBus.Instance.StartListening(EventName.NodeConquered, NodeConquered);
+    }
+
+    private void UnRegisterEvents()
+    {
+        EventBus.Instance.StopListening(EventName.BattleStarts, InitBattle);
+        EventBus.Instance.StopListening(EventName.NodeTapped, NodeTapped);
+        EventBus.Instance.StopListening(EventName.NodeConquered, NodeConquered);
+    }
     public void Initialize(BattleScriptableObject battleInfo)
     {
         nodeList = new List<Node>();
@@ -65,25 +80,8 @@ public class BattleController : MonoBehaviour
     private void InitUnits()
     {
         unitPool = gameObject.AddComponent(typeof(ObjectPool)) as ObjectPool;
-
         unitPool.Initialize(UnitPrefab, 100);
-
     }
-
-    private void RegisterEvents()
-    {
-        EventBus.Instance.StartListening(EventName.BattleStarts, InitBattle);
-        EventBus.Instance.StartListening(EventName.BattleEnds, EndBattle);
-        EventBus.Instance.StartListening(EventName.NodeTapped, NodeTapped);
-    }
-
-    private void UnRegisterEvents()
-    {
-        EventBus.Instance.StopListening(EventName.BattleStarts, InitBattle);
-        EventBus.Instance.StopListening(EventName.BattleEnds, EndBattle);
-        EventBus.Instance.StopListening(EventName.NodeTapped, NodeTapped);
-    }
-
 
     public Player AddOrGetPlayer(PlayerScriptableObject playerSO)
     {
@@ -171,12 +169,14 @@ public class BattleController : MonoBehaviour
 
     public void Victory()
     {
+        EventBus.Instance.TriggerEvent(EventName.BattleWin, null);
         EndBattle(null);
         //TODO
         Debug.Log("Victory");
     }
     public void Defeat()
     {
+        EventBus.Instance.TriggerEvent(EventName.BattleLost, null);
         EndBattle(null);
         //Defeat
         Debug.Log("Defeat");

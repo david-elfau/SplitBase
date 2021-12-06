@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Medium
   EnemyColor: {r: 0.9254902, g: 0.66183907, b: 0.11764706, a: 1}
+  UnitIncreasePerSecond: 1
+  TimeToTakeDecision: 6
+  RandomFactorDecision: 0.5

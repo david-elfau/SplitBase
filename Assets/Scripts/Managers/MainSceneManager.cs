@@ -15,6 +15,7 @@ public class MainSceneManager : GenericManager
         BattleProgressionManager.Initialize();
         SceneController.Initialize();
         DataManager.Initialize();
+        RegisterEvents();
 
         initializated = true;
     }
@@ -23,6 +24,14 @@ public class MainSceneManager : GenericManager
     {
         Initialize();
     }
+    
 
+    public override void RegisterEvents()
+    {
+    }
+
+    public override void UnregisterEvents()
+    {
+    }
 
 }

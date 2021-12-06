@@ -19,6 +19,7 @@ public class GameSceneManager : GenericManager
         InitializeBattleController();
 
         UIManager.Initialize(BattleController);
+        RegisterEvents();
         initializated = true;
     }
 
@@ -43,6 +44,14 @@ public class GameSceneManager : GenericManager
     private void Awake()
     {
         Initialize();
+    }
+
+    public override void RegisterEvents()
+    {
+    }
+
+    public override void UnregisterEvents()
+    {
     }
 
 
