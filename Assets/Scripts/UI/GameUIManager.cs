@@ -19,12 +19,12 @@ public class GameUIManager : GenericManager
     {
 
         Debug.Log("Lanza evento play game");
-        EventBus.Instance.TriggerEvent(EventName.BattleStarts);
+        EventBus.Instance.TriggerEvent(EventName.BattleStarts,null);
     }
     public void EventExitGame()
     {
         Debug.Log("Lanza evento exit game");
-        EventBus.Instance.TriggerEvent(EventName.BattleUnload);
+        EventBus.Instance.TriggerEvent(EventName.BattleUnload, null);
     }
 
     private void InitNodesLabel()

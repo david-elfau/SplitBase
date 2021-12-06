@@ -20,13 +20,13 @@ public class SceneController : GenericManager
         EventBus.Instance.StartListening(EventName.BattleUnload, ChangeToMainScene);
     }
 
-    void ChangeToGameScene()
+    void ChangeToGameScene(object objectParameter)
     {
         Debug.Log("Load game scene");
         StartCoroutine(LoadYourAsyncScene(gameScene));
     }
 
-    public void ChangeToMainScene()
+    public void ChangeToMainScene(object objectParameter)
     {
 
         Debug.Log("Load main scene");

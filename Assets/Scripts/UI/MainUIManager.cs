@@ -13,6 +13,6 @@ public class MainUIManager : GenericManager
 
     public void EventLoadGame()
     {
-        EventBus.Instance.TriggerEvent(EventName.BattleLoad);
+        EventBus.Instance.TriggerEvent(EventName.BattleLoad, null);
     }
 }

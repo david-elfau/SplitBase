@@ -13,6 +13,7 @@ public enum EventName {
     BattlePauses,
     BattleResumes,
     NodeConquered,
-    NextBattle
+    NextBattle,
+    NodeTapped
 }
 

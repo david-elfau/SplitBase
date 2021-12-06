@@ -20,45 +20,45 @@ public class EventBus
         }        
     }
 
-    private Dictionary<EventName, UnityEvent> eventDictionary;
+    private Dictionary<EventName, UnityEvent<ParameterBusObject>> eventDictionary;
 
     void Init()
     {
         _instance = this;
         if (eventDictionary == null)
         {
-            eventDictionary = new Dictionary<EventName, UnityEvent>();
+            eventDictionary = new Dictionary<EventName, UnityEvent<ParameterBusObject>>();
         }
         Debug.Log("EventBus Init");
     }
 
-    public void TriggerEvent(EventName eventName)
+    public void TriggerEvent(EventName eventName, ParameterBusObject parameterObject)
     {
-        UnityEvent thisEvent;
+        UnityEvent<ParameterBusObject> thisEvent;
         if (_instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
-            thisEvent.Invoke();
+            thisEvent.Invoke(parameterObject);
         }
     }
 
-    public void StartListening(EventName eventName, UnityAction action)
+    public void StartListening(EventName eventName, UnityAction<ParameterBusObject> action)
     {
-        UnityEvent thisEvent;
+        UnityEvent<ParameterBusObject> thisEvent;
         if (_instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.AddListener(action);
         }
         else
         {
-            thisEvent = new UnityEvent();
+            thisEvent = new UnityEvent<ParameterBusObject>();
             thisEvent.AddListener(action);
             _instance.eventDictionary.Add(eventName, thisEvent);
         }
     }
 
-    public void StopListening(EventName eventName, UnityAction listener)
+    public void StopListening(EventName eventName, UnityAction<ParameterBusObject> listener)
     {
-        UnityEvent thisEvent = null;
+        UnityEvent<ParameterBusObject> thisEvent = null;
         if (_instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.RemoveListener(listener);

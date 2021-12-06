@@ -74,12 +74,14 @@ public class BattleController : MonoBehaviour
     {
         EventBus.Instance.StartListening(EventName.BattleStarts, InitBattle);
         EventBus.Instance.StartListening(EventName.BattleEnds, EndBattle);
+        EventBus.Instance.StartListening(EventName.NodeTapped, NodeTapped);
     }
 
     private void UnRegisterEvents()
     {
         EventBus.Instance.StopListening(EventName.BattleStarts, InitBattle);
         EventBus.Instance.StopListening(EventName.BattleEnds, EndBattle);
+        EventBus.Instance.StopListening(EventName.NodeTapped, NodeTapped);
     }
 
 
@@ -118,7 +120,7 @@ public class BattleController : MonoBehaviour
         return playerOut;
     }
 
-    public void InitBattle()
+    public void InitBattle(ParameterBusObject objectParameter)
     {
         //TODO
         foreach (Node node in nodeList)
@@ -130,13 +132,13 @@ public class BattleController : MonoBehaviour
 
     }
 
-    public void EndBattle()
+    public void EndBattle(ParameterBusObject objectParameter)
     {
         //TODO
         LifeCycle.End();
     }
 
-    public void NodeConquered()
+    public void NodeConquered(ParameterBusObject objectParameter)
     {
         int playerNodes = 0;
         int enemyNodes = 0;
@@ -169,13 +171,13 @@ public class BattleController : MonoBehaviour
 
     public void Victory()
     {
-        EndBattle();
+        EndBattle(null);
         //TODO
         Debug.Log("Victory");
     }
     public void Defeat()
     {
-        EndBattle();
+        EndBattle(null);
         //Defeat
         Debug.Log("Defeat");
     }
@@ -195,8 +197,7 @@ public class BattleController : MonoBehaviour
             {
                 ai.TakeDecision();
             }
-        }
-        
+        }        
     }
 
     public void Attack(Node nodeDestiny, Player player)
@@ -208,5 +209,16 @@ public class BattleController : MonoBehaviour
                 node.Attack(nodeDestiny);
             }
         }
+    }
+
+    public void NodeTapped(ParameterBusObject parameterObject)
+    {
+        Node nodeDestiny = parameterObject.GetParameterNode();
+        if (nodeDestiny)
+        {
+
+            Attack(nodeDestiny, player);
+        }
+
     }
 }

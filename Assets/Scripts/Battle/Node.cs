@@ -85,4 +85,10 @@ public class Node : MonoBehaviour
             unit.StartMoving(this, 1, enemyNode, timeBetweenNodes*i);
         }
     }
+
+    public void OnMouseDown()
+    {
+        Debug.Log("Node:Touched. Power = "+Power);
+        EventBus.Instance.TriggerEvent(EventName.NodeTapped,new ParameterBusObject(this));
+    }
 }
