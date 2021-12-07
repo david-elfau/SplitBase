@@ -80,7 +80,7 @@ public class BattleController : MonoBehaviour
     private void InitUnits()
     {
         unitPool = gameObject.AddComponent(typeof(ObjectPool)) as ObjectPool;
-        unitPool.Initialize(UnitPrefab, 100);
+        unitPool.Initialize(UnitPrefab, 500);
     }
 
     public Player AddOrGetPlayer(PlayerScriptableObject playerSO)
@@ -132,8 +132,8 @@ public class BattleController : MonoBehaviour
 
     public void EndBattle(ParameterBusObject objectParameter)
     {
-        //TODO
         LifeCycle.End();
+        unitPool.DisableFullPool();
     }
 
     public void NodeConquered(ParameterBusObject objectParameter)
@@ -171,15 +171,11 @@ public class BattleController : MonoBehaviour
     {
         EventBus.Instance.TriggerEvent(EventName.BattleWin, null);
         EndBattle(null);
-        //TODO
-        Debug.Log("Victory");
     }
     public void Defeat()
     {
         EventBus.Instance.TriggerEvent(EventName.BattleLost, null);
         EndBattle(null);
-        //Defeat
-        Debug.Log("Defeat");
     }
 
     void Update()

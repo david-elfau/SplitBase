@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1186cc1ee43a77c4c82da62b13a35204, type: 3}
+  m_Name: Battle4
+  m_EditorClassIdentifier: 
+  NodeList:
+  - Position: {x: 0, y: 3}
+    InitialPower: 10
+    GrowSpeed: 1
+    Player: {fileID: 11400000, guid: d62e5d90f7291714c8413a929740e73b, type: 2}
+  - Position: {x: 1.5, y: 2.598076}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 2.598076, y: 1.5}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 3, y: 1.8369701e-16}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 2.598076, y: -1.5}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 1.5, y: -2.598076}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 0, y: -3}
+    InitialPower: 10
+    GrowSpeed: 1
+    Player: {fileID: 11400000, guid: 3bb3c5bfa386d5c439c10733c431e69e, type: 2}
+  - Position: {x: -1.5, y: 2.598076}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -2.598076, y: 1.5}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -3, y: 1.8369701e-16}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -2.598076, y: -1.5}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -1.5, y: -2.598076}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 0.75, y: 1.299038}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 1.5, y: 9.184851e-17}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -0.75, y: -1.299038}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -1.5, y: -2.7554554e-16}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: -0.75, y: 1.299038}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 0.75, y: 1.299038}
+    InitialPower: 8
+    GrowSpeed: 0
+    Player: {fileID: 0}
+  - Position: {x: 0, y: 0}
+    InitialPower: 10
+    GrowSpeed: 1
+    Player: {fileID: 11400000, guid: edcac6f0894fab3409f2777a83d8e190, type: 2}
+  GoldReward: 100

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleProgressionManager : GenericManager
+public class BattleDataStorage : GenericManager
 {
     [SerializeField] private List<BattleScriptableObject> BattleList;
 

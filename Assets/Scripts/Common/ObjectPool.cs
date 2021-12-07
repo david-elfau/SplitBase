@@ -14,7 +14,7 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             PoolObject poolObject = Instantiate(GameObjectPrefab, this.transform).GetComponent<PoolObject>();
-            
+            poolObject.gameObject.SetActive(false);
             poolObject.Initialize();
             //TODO CREATE BUNCH OF UNITS
             pool.Add(poolObject);
@@ -39,5 +39,14 @@ public class ObjectPool : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void DisableFullPool()
+    {
+        foreach (PoolObject obj in pool)
+        {
+            obj.DisablePoolObject();
+        }
+
     }
 }

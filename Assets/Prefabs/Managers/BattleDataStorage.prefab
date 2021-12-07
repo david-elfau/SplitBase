@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4170366330616513114}
   - component: {fileID: 6941664862925657575}
   m_Layer: 0
-  m_Name: BattleProgressionManager
+  m_Name: BattleDataStorage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,3 +47,5 @@ MonoBehaviour:
   BattleList:
   - {fileID: 11400000, guid: f243d158102521e45ba06efbc10151ad, type: 2}
   - {fileID: 11400000, guid: 3dd6ee1a3433a5240821c9b27c6f4c59, type: 2}
+  - {fileID: 11400000, guid: 9e814bf2eacc329428c905f7f5a0d71d, type: 2}
+  - {fileID: 11400000, guid: d1c9b0925c2ef2b449807e80c7540b7d, type: 2}

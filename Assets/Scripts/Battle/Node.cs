@@ -85,7 +85,14 @@ public class Node : MonoBehaviour
         for (int i = 0; i < unitsToAttack; i++)
         {
             Unit unit =(Unit) battleController.unitPool.GetFreeObject();
-            unit.StartMoving(this, 1, enemyNode, timeBetweenNodes*i);
+            if (unit)
+            {
+                unit.StartMoving(this, 1, enemyNode, timeBetweenNodes * i);
+            }
+            else
+            {
+                Debug.LogError("Not available unit in the pool");
+            }
         }
     }
 

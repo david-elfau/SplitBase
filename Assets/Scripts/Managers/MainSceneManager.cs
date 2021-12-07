@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainSceneManager : GenericManager
 {
-    public BattleProgressionManager BattleProgressionManager;
+    public BattleDataStorage BattleProgressionManager;
     public SceneController SceneController;
     public DataManager DataManager;
 

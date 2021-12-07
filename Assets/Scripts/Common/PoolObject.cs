@@ -13,11 +13,13 @@ public abstract class PoolObject : MonoBehaviour
     public abstract void UpdatePoolObject();
     public virtual void EnablePoolObject()
     {
+        gameObject.SetActive(true);
         LifeCycle.Play();
     }
     
     public virtual void DisablePoolObject()
     {
+        gameObject.SetActive(false);
         LifeCycle.Pause();
     }
 

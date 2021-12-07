@@ -105,22 +105,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleProgressionManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6941664862925657575, guid: 4a89db9b16c96bf44a789cead225c048, type: 3}
-      propertyPath: initializated
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6941664862925657575, guid: 4a89db9b16c96bf44a789cead225c048, type: 3}
-      propertyPath: BattleList.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6941664862925657575, guid: 4a89db9b16c96bf44a789cead225c048, type: 3}
-      propertyPath: BattleList.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: f243d158102521e45ba06efbc10151ad, type: 2}
-    - target: {fileID: 6941664862925657575, guid: 4a89db9b16c96bf44a789cead225c048, type: 3}
-      propertyPath: BattleList.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 3dd6ee1a3433a5240821c9b27c6f4c59, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a89db9b16c96bf44a789cead225c048, type: 3}
 --- !u!4 &988440289445565742 stripped

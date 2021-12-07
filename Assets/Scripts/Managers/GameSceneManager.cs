@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameSceneManager : GenericManager
 {
-    public BattleProgressionManager BattleProgressionManager;
+    public BattleDataStorage BattleStorage;
     public SceneController SceneController;
     public DataManager DataManager;
     public BattleController BattleController;
@@ -13,7 +13,7 @@ public class GameSceneManager : GenericManager
 
     public override void Initialize()
     {
-        BattleProgressionManager.Initialize();
+        BattleStorage.Initialize();
         SceneController.Initialize();
         DataManager.Initialize();
         InitializeBattleController();
@@ -28,7 +28,7 @@ public class GameSceneManager : GenericManager
         int currentLevel = this.DataManager.GetPlayerProgress();
 
         Debug.Log("Loading level: " + currentLevel);
-        BattleScriptableObject battle = this.BattleProgressionManager.GetBattle(currentLevel);
+        BattleScriptableObject battle = this.BattleStorage.GetBattle(currentLevel);
         if(battle)
         {
             BattleController.Initialize(battle);

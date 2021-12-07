@@ -13,6 +13,7 @@ public class DataManager : GenericManager
     public override void Initialize()
     {
         LoadAll();
+        RegisterEvents();
         initializated = true;
     }
 
@@ -43,6 +44,11 @@ public class DataManager : GenericManager
         return playerProgress;
     }
 
+    public void IncreasePlayerProgress(ParameterBusObject parameterObject)
+    {
+        SetPlayerProgress(GetPlayerProgress() + 1);
+    }
+
     private void SaveData(string key, int value)
     {
         PlayerPrefs.SetInt(key, value);
@@ -59,11 +65,11 @@ public class DataManager : GenericManager
 
     public override void RegisterEvents()
     {
-        throw new System.NotImplementedException();
+        EventBus.Instance.StartListening(EventName.BattleWin, IncreasePlayerProgress);
     }
 
     public override void UnregisterEvents()
     {
-        throw new System.NotImplementedException();
+        EventBus.Instance.StopListening(EventName.BattleWin, IncreasePlayerProgress);
     }
 }
