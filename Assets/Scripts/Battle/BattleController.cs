@@ -56,26 +56,6 @@ public class BattleController : MonoBehaviour
         Debug.Log("Nivel cargado");
     }
 
-    public Node GetWeakestRivalNode(PlayerAI playerAI)
-    {
-        Node nodePropossed = null;
-        foreach(Node node in nodeList)
-        {
-            if(node.PlayerOwner != playerAI)
-            {
-                if(nodePropossed == null)
-                {
-                    nodePropossed = node;
-                }
-                
-                if (nodePropossed.Power > node.Power)
-                {
-                    nodePropossed = node;
-                }
-            }
-        }
-        return nodePropossed;
-    }
 
     private void InitUnits()
     {
