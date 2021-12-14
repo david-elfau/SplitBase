@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class NodeLabel : MonoBehaviour
 {
-    public Text TextLabel;
+    public TextMeshProUGUI TextLabel;
     public Node NodeAttached;
     // Start is called before the first frame update
     public void Initialize(Node objectAttached)

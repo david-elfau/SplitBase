@@ -7,6 +7,7 @@ public class MainSceneManager : GenericManager
     public BattleDataStorage BattleProgressionManager;
     public SceneController SceneController;
     public DataManager DataManager;
+    public MainUIManager UIManager;
 
 
     public override void Initialize()
@@ -15,6 +16,9 @@ public class MainSceneManager : GenericManager
         BattleProgressionManager.Initialize();
         SceneController.Initialize();
         DataManager.Initialize();
+        UIManager.Initialize();
+        UIManager.SetDataManager(DataManager);
+
         RegisterEvents();
 
         initializated = true;

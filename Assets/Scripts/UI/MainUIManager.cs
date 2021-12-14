@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MainUIManager : GenericManager
-{   
-    
+{
+    public GoldCounter GoldCounterPanel;
+
     public override void Initialize()
     {
         RegisterEvents();
+    }
+    public void SetDataManager(DataManager dataManager)
+    {
         initializated = true;
+        GoldCounterPanel.Initialize(dataManager);
     }
 
 
