@@ -33,4 +33,4 @@ MonoBehaviour:
     InitialPower: 14
     GrowSpeed: 0
     Player: {fileID: 0}
-  GoldReward: 100
+  GoldReward: 202

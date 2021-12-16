@@ -16,6 +16,8 @@ public class BattleController : MonoBehaviour
     public Player player;
     public ObjectLifeCycle LifeCycle = new ObjectLifeCycle();
 
+    private BattleScriptableObject battleInfo;
+
 
 
     private void RegisterEvents()
@@ -33,27 +35,31 @@ public class BattleController : MonoBehaviour
     }
     public void Initialize(BattleScriptableObject battleInfo)
     {
+        this.battleInfo = battleInfo;
+
         nodeList = new List<Node>();
-
-        foreach (BattleScriptableObject.Node node in battleInfo.NodeList)
-        {
-            Node gameObject = Instantiate(NodePrefab, this.transform).GetComponent<Node>();
-
-            Vector3 nodePosition = new Vector3(node.Position.x, 0, node.Position.y);
-
-            Player playerNode = AddOrGetPlayer(node.Player);
-
-            gameObject.GetComponent<Node>().Initialize(playerNode, node.InitialPower, nodePosition,this);
-
-            nodeList.Add(gameObject);
-        }
-
-        InitUnits();
         
+        InitNodelist();
+        InitUnits();      
 
         RegisterEvents();
+
         LifeCycle.Initializated();
         Debug.Log("Nivel cargado");
+    }
+
+    private void InitNodelist()
+    {
+        foreach (BattleScriptableObject.Node nodeData in battleInfo.NodeList)
+        {
+            Node node = Instantiate(NodePrefab, this.transform).GetComponent<Node>();
+            Vector3 nodePosition = new Vector3(nodeData.Position.x, 0, nodeData.Position.y);
+            Player playerNode = AddOrGetPlayer(nodeData.Player);
+
+            node.Initialize(playerNode, nodeData.InitialPower, nodePosition, this);
+
+            nodeList.Add(node);
+        }
     }
 
 
@@ -149,12 +155,12 @@ public class BattleController : MonoBehaviour
 
     public void Victory()
     {
-        EventBus.Instance.TriggerEvent(EventName.BattleWin, null);
+        EventBus.Instance.TriggerEvent(EventName.BattleWin, new ParameterBusObject(battleInfo));
         EndBattle(null);
     }
     public void Defeat()
     {
-        EventBus.Instance.TriggerEvent(EventName.BattleLost, null);
+        EventBus.Instance.TriggerEvent(EventName.BattleLost, new ParameterBusObject(battleInfo));
         EndBattle(null);
     }
 

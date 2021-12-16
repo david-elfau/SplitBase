@@ -31,6 +31,11 @@ public class ParameterBusObject
         parameterValue = nodeParameter;
     }
 
+    public ParameterBusObject(BattleScriptableObject battleParameter)
+    {
+        parameterValue = battleParameter;
+    }
+
     public string GetParameterString()
     {
         return parameterValue.ToString();
@@ -68,6 +73,20 @@ public class ParameterBusObject
         {
             Node nodeValue = (Node)parameterValue;
             return nodeValue;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+
+    }
+
+    public BattleScriptableObject GetParameterBattleData()
+    {
+        try
+        {
+            BattleScriptableObject battleValue = (BattleScriptableObject)parameterValue;
+            return battleValue;
         }
         catch (Exception)
         {

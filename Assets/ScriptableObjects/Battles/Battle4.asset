@@ -89,4 +89,4 @@ MonoBehaviour:
     InitialPower: 10
     GrowSpeed: 1
     Player: {fileID: 11400000, guid: edcac6f0894fab3409f2777a83d8e190, type: 2}
-  GoldReward: 100
+  GoldReward: 4000

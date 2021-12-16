@@ -23,7 +23,7 @@ public class DataManager : GenericManager
         playerProgress = LoadIntData(kPlayerProgress);
     }
 
-    public void SetMoney(int newMoney)
+    private void SetMoney(int newMoney)
     {
         money = newMoney;
         SaveData(kMoney, money);
@@ -32,6 +32,15 @@ public class DataManager : GenericManager
     {
         return money;
     }
+    public void IncreaseMoney(int newMoney)
+    {
+        SetMoney(GetMoney() + newMoney);
+    }
+    public void DecreaseMoney(int newMoney)
+    {
+        SetMoney(GetMoney() - newMoney);
+    }
+
 
 
     public void SetPlayerProgress(int newProgress)
@@ -44,9 +53,15 @@ public class DataManager : GenericManager
         return playerProgress;
     }
 
-    public void IncreasePlayerProgress(ParameterBusObject parameterObject)
+    public void BattleWin(ParameterBusObject parameterObject)
     {
         SetPlayerProgress(GetPlayerProgress() + 1);
+
+        BattleScriptableObject battleData = parameterObject.GetParameterBattleData();
+        if (battleData)
+        {
+            IncreaseMoney(battleData.GoldReward);
+        }
     }
 
     private void SaveData(string key, int value)
@@ -65,11 +80,11 @@ public class DataManager : GenericManager
 
     public override void RegisterEvents()
     {
-        EventBus.Instance.StartListening(EventName.BattleWin, IncreasePlayerProgress);
+        EventBus.Instance.StartListening(EventName.BattleWin, BattleWin);
     }
 
     public override void UnregisterEvents()
     {
-        EventBus.Instance.StopListening(EventName.BattleWin, IncreasePlayerProgress);
+        EventBus.Instance.StopListening(EventName.BattleWin, BattleWin);
     }
 }

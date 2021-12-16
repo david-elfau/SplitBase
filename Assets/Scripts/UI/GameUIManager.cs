@@ -13,6 +13,8 @@ public class GameUIManager : GenericManager
     public RectTransform LostPanel;
     public RectTransform GamePanel;
 
+    public RewardPanel RewardPanel;
+
 
     public void Initialize(BattleController battleController)
     {
@@ -59,8 +61,14 @@ public class GameUIManager : GenericManager
 
     }
 
-    private void BattleWin(ParameterBusObject busObject)
+    private void BattleWin(ParameterBusObject parameterObject)
     {
+        BattleScriptableObject battleData = parameterObject.GetParameterBattleData();
+        if (battleData)
+        {
+            RewardPanel.Initialize(battleData);
+        }
+        
         WinPanel.gameObject.SetActive(true);
         LostPanel.gameObject.SetActive(false);
         GamePanel.gameObject.SetActive(false);
@@ -82,6 +90,4 @@ public class GameUIManager : GenericManager
             label.Initialize(node);
         }
     }
-
-
 }
